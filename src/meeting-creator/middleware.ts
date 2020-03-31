@@ -23,7 +23,22 @@ export function createMeetingMiddleware(): Middleware {
     }
 
     if (action.type === MEETING_CREATED_EVENT) {
-      store.dispatch(push('/copyMeeting'));
+      /* We store a schoolbox instance's domain as a url param
+       * We use it to redirect to another location in that domain where send the meeting's url
+       */
+      const url = new URL(document.location.href);
+      let returnUrl = new URL(url.searchParams.get('instance') + '/api/teams.php');
+
+      /* The meeting's url is also another querystring param
+       * These two pieces of the puzzle are then visited and echo'd
+       * so that we can pass the message up the schoolbox instance's iframe hierarchy
+       */
+      let returnUrlSearchParams = returnUrl.searchParams;
+      returnUrlSearchParams.set('meetingUrl', action.meeting.joinWebUrl);
+
+      returnUrl.search = returnUrlSearchParams.toString();
+
+      document.location.href = returnUrl.toString();
     }
     next(action);
   };
