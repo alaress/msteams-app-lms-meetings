@@ -1,12 +1,10 @@
-FROM node:current as builder
+FROM node:current-alpine as builder
 WORKDIR /app
 COPY . .
 RUN yarn install; \
  yarn run build
 
-FROM node:current-alpine
-RUN yarn global add serve
-WORKDIR /app
-COPY --from=builder /app/build .
-CMD ["serve", "-p", "5000", "-s", "."]
-EXPOSE 5000
+FROM nginx:stable-alpine
+COPY --from=builder /app/build /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
