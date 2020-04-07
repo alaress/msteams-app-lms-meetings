@@ -9,10 +9,7 @@ body {
 }
 
 .header {
-  display: flex;
-  justify-content: space-around;
-  padding: 1rem;
-  border-bottom: 1px solid #cccccc6b;
+  display: none;
 }
 
 .headerLogo {
@@ -83,7 +80,7 @@ body {
 }
 
 .splashImage {
-  max-width: 200px;
+  max-width: 150px;
   margin-top: 0;
 }
 
