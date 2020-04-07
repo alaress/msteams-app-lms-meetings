@@ -5,7 +5,7 @@ body {
 }
 
 .microsoftLogo {
-  padding: 2rem;
+  display: none;
 }
 
 .header {
@@ -83,8 +83,8 @@ body {
 }
 
 .splashImage {
-  max-width: 650px;
-  margin-top: 4.3rem;
+  max-width: 200px;
+  margin-top: 0;
 }
 
 .uTextCenter {
